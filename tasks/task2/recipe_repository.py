@@ -1,11 +1,14 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, Session
 
-from db import Base, engine
+try:
+    from tasks.task2.db import Base, engine
+except ImportError:
+    from db import Base, engine
 
 
 class Recipe(Base):
-    tablename = "recipes"
+    __tablename__ = "recipes"
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -15,7 +18,7 @@ class Recipe(Base):
 
 
 class Ingredient(Base):
-    tablename = "ingredients"
+    __tablename__ = "ingredients"
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
